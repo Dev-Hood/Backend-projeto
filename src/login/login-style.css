@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+body{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 12%, rgba(0,212,255,1) 100%);
+    min-width: 100vh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    background-color: white;
+    min-width: 350px;
+    max-width: 350px;
+    min-height: 40vh;
+    padding: 2rem 2rem 1rem 2rem;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+h2{
+    width: min-content;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+h2::before{
+    content: '';
+    position: absolute;
+    height: 4px;
+    width: 25px;
+    bottom: 3px;
+    left: 0;
+    border-radius: 8px;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 12%, rgba(0,212,255,1) 100%);
+}
+.input-field{
+    position: relative;
+}
+.input-field input{
+    color: rgba(0, 0, 0, 0.7);
+    outline: none;
+    font-size: 0.9rem;
+}
+.input-field input::before{
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.input-field{
+    margin-bottom: 1.5rem;
+}
+
+#submit {
+    color: white;
+    letter-spacing: 1px;
+    font-weight: bolder;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    padding: 0.4rem;
+    width: 150px;
+    border-radius: 5px;
+    background-color: rgb(0, 140, 255);
+}
+h6{
+    text-align: center;
+}
+.input-field .underline::before{
+    content: ' ';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    bottom: -5px;
+    left: 0;
+    background:rgba(0, 0, 0, 0.2)
+}
+.input-field .underline::after{
+    content: ' ';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    bottom: -5px;
+    left: 0;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 12%, rgba(0,212,255,1) 100%);
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+    transform-origin: left;
+}
+.input-field input:focus ~ .underline::after{
+    transform: scaleX(1);
+}
+
