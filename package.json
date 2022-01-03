@@ -19,6 +19,7 @@
   },
   "scripts": {
     "dev": "nodemon src/server.js",
+    "bot": "node src/projeto-point/index.js",
     "bd": "node src/database/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
