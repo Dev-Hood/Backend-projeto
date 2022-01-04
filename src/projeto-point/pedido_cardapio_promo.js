@@ -35,7 +35,7 @@ const pedido_cardapio_promo = async (client,numero,cliente,msg)=>{
     await client
       .sendListMenu(numero, '🧾Menu', 'subTitle', 'Escolha a opção referente ao que deseja:', 'Clique aqui', list)
       .then(() => {
-        cliente.estagioCliente = 'verificação'
+        cliente.estagioCliente = 'comprando'
       })
       .catch((erro) => {
         console.error('Error when sending: ', erro); //return object error

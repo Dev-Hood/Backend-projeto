@@ -2,6 +2,7 @@ const venom = require('venom-bot');
 const list = require('./menu')
 const inicio = require('./inicio');
 const pcp = require('./pedido_cardapio_promo')
+const comprando = require('./comprando')
 
 var clientes = []
 
@@ -20,7 +21,7 @@ const verificarCliente = (numero)=> {
 
 venom
   .create({
-    headless : false,
+    headless : true,
     session: 'venda', //name of session
     multidevice: false // for version not multidevice use false.(default: true)
   })
@@ -37,27 +38,30 @@ function start(client) {
       if(!veri){
         await client
         .sendText(message.from, '*Olá!*😊\nEu sou a assistente virtual da *Point Lanches*, e vou ajudar você a fazer o seu pedido 🍔🍕')
-        .then((result) => {
+        .then(() => {
           clientes.push(
             {
               telefone:message.from,
               estagioCliente:'inicio',
-              resumo:'',
+              resumo:[],
               total:0,
               pagamento:'',
               endereco:''
             }
           )
           inicio(client,message.from,clientes[pos])
-          console.log(clientes)
+          
         })
         .catch((erro) => {
           console.error('Error when sending: ', erro); //return object error
         });
       }
 
-      else if(clientes[pos].estagioCliente == 'inicio-2'){
+      else if(clientes[pos].estagioCliente == 'pedido-cardapio-promo'){
         pcp(client,message.from,clientes[pos],message.body)
+      }
+      else if(clientes[pos].estagioCliente == 'comprando'){
+        comprando(client,message.from,clientes[pos],message.body)
       }
       /*
        

@@ -19,8 +19,8 @@ const buttons = [
 const inicio = async (client,numero,cliente)=>{
     await client
     .sendButtons(numero, 'Escolha a opção desejada:', buttons, ' ')
-    .then((result) => {
-        cliente.estagioCliente = 'inicio-2'
+    .then(() => {
+        cliente.estagioCliente = 'pedido-cardapio-promo'
     })
     .catch((erro) => {
         console.error('Error when sending: ', erro); //return object error
