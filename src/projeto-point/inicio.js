@@ -23,7 +23,7 @@ const inicio = async (client,numero,cliente)=>{
         cliente.estagioCliente = 'pedido-cardapio-promo'
     })
     .catch((erro) => {
-        console.error('Error when sending: ', erro); //return object error
+        console.error('Error when sending: erro ao escolher opçao ', erro); //return object error
     });
 }
 

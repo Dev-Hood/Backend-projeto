@@ -38,7 +38,7 @@ const pedido_cardapio_promo = async (client,numero,cliente,msg)=>{
         cliente.estagioCliente = 'comprando'
       })
       .catch((erro) => {
-        console.error('Error when sending: ', erro); //return object error
+        console.error('Error when sending: erro no pedido', erro); //return object error
       });
   }
   

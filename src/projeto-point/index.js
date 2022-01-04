@@ -6,19 +6,6 @@ const comprando = require('./comprando')
 
 var clientes = []
 
-
-const verificarCliente = (numero)=> {
-  let veri = false
-  let pos = 0
-  clientes.forEach((elemento,indice)=>{
-    if(numero == elemento.telefone){
-      veri = true
-      pos = indice
-    }
-  })
-  return [veri,pos]
-}
-
 venom
   .create({
     headless : true,
@@ -32,13 +19,13 @@ venom
 
 function start(client) {
   client.onMessage( async (message) => {
-   var [veri,pos] = verificarCliente(message.from)
-
+    var cliente = await clientes.find((user) => user.telefone == message.from);
+    console.log('verificação: '+cliente)
     if (message.isGroupMsg === false) {
-      if(!veri){
+      if(cliente == undefined){
         await client
         .sendText(message.from, '*Olá!*😊\nEu sou a assistente virtual da *Point Lanches*, e vou ajudar você a fazer o seu pedido 🍔🍕')
-        .then(() => {
+        .then(async() => {
           clientes.push(
             {
               telefone:message.from,
@@ -49,19 +36,22 @@ function start(client) {
               endereco:''
             }
           )
-          inicio(client,message.from,clientes[pos])
+          await inicio(client,message.from,clientes[clientes.length-1])
           
         })
         .catch((erro) => {
           console.error('Error when sending: ', erro); //return object error
         });
+        console.log(clientes)
       }
+      else if(cliente.estagioCliente == 'pedido-cardapio-promo'){
+        await pcp(client,message.from,cliente,message.body)
+        console.log(clientes)
 
-      else if(clientes[pos].estagioCliente == 'pedido-cardapio-promo'){
-        pcp(client,message.from,clientes[pos],message.body)
       }
-      else if(clientes[pos].estagioCliente == 'comprando'){
-        comprando(client,message.from,clientes[pos],message.body)
+      else if(cliente.estagioCliente == 'comprando'){
+        console.log(clientes)
+        comprando(client,message.from,cliente,message.body)
       }
       /*
        

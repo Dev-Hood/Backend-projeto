@@ -81,85 +81,79 @@ const buttons = [
     }
 ]
 
-function gerarResumo(resumo){
-    let todoResumo=''
-    const countMap = {};
-  
-    for (const element of resumo) {
-      if (!countMap[element]) {
-        // Se ainda não existir elemento, definimos como um, já que
-        // estamos na primeira ocorrência.
-        countMap[element] = 1;
-      } else {
-        // Caso contrário, incrementamos um no número atual.
-        countMap[element] += 1;
-      }
-    }
-    Object.keys(countMap).forEach((key) => {
-        todoResumo+=`*${countMap[key]}x - ${key}* \n`
-    });
-    
-    return todoResumo;
-}
-
+const gerarResumo = require('./gerar-resumo')
 
 const comprando = async (client,numero,cliente,msg)=>{
     var tamanho =''
-    Object.keys(tabelaDePrecosPizzas).forEach( async (key) => {
-        if(msg.includes(key)){
-            if(msg.includes('Pequena')){
-                cliente.resumo.push(key+"-Pequena")
-                cliente.total+=tabelaDePrecosPizzas[key]["pequena"]
-                tamanho = 'Pequena'
-            }
-            else if(msg.includes('Media')){
-                cliente.resumo.push(key+"-Média")
-                cliente.total+=tabelaDePrecosPizzas[key]["media"]
-                tamanho = 'Média'
-            }
-            else if(msg.includes('Grande')){
-                cliente.resumo.push(key+"-Grande")
-                cliente.total+=tabelaDePrecosPizzas[key]["grande"]
-                tamanho = 'Grande'
-            }
-            if(tamanho!=''){
-                await client
-                    .sendText(numero, `OK! Uma pizza *${key} ${tamanho}* foi adicionada ao seu pedido✅`)
-                    .catch((erro) => {
-                        console.error('Error when sending: ', erro); //return object error
-                    });
-                    break;
-            }
-        }
-    })
-    Object.keys(tabelaDePrecosBurger).forEach( async (key) => {
-        if(msg.includes(key)){
-            cliente.resumo.push(key)
-            cliente.total+=tabelaDePrecosBurger[key]
-            await client
-                .sendText(numero, 'OK! Um *'+key+'* foi adicionado ao seu pedido✅')
-                .catch((erro) => {
-                    console.error('Error when sending: ', erro); //return object error
-                });
-            break;
-        }
-        
-    },async ()=>{
-        await client
-            .sendText(numero, `Aqui está um resumo do seu pedido até agora:\n\n ${gerarResumo(cliente.resumo)}\n*Totalizando:* R$${cliente.total}.00`)
-            .catch((erro) => {
-                console.error('Error when sending: ', erro); //return object error
-            });
-        await client
-            .sendButtons(numero, 'Você deseja:', buttons, ' ')
-            .then(() => {
-                cliente.estagioCliente = 'veri-continuar-comprando'
+    function veriPizza(){
+        return new Promise((resolve)=>{
+            Object.keys(tabelaDePrecosPizzas).forEach(async (key) => {
+                if (msg.includes(key)) {
+                    if (msg.includes('Pequena')) {
+                        cliente.resumo.push(key + "-Pequena");
+                        cliente.total += tabelaDePrecosPizzas[key]["pequena"];
+                        tamanho = 'Pequena';
+                    }
+                    else if (msg.includes('Média')) {
+                        cliente.resumo.push(key + "-Média");
+                        cliente.total += tabelaDePrecosPizzas[key]["media"];
+                        tamanho = 'Média';
+                    }
+                    else if (msg.includes('Grande')) {
+                        cliente.resumo.push(key + "-Grande");
+                        cliente.total += tabelaDePrecosPizzas[key]["grande"];
+                        tamanho = 'Grande';
+                    }
+                    if (tamanho != '') {
+                        await client
+                            .sendText(numero, `OK! Uma pizza *${key} ${tamanho}* foi adicionada ao seu pedido✅`)
+                            .catch((erro) => {
+                                console.error('Error when sending:erro ao comprar pizza ', erro); //return object error
+                            });
+                        resolve(true)
+                        return;    
+                    }
+                }
+                
             })
-            .catch((erro) => {
-                console.error('Error when sending: ', erro); //return object error
-            });
+            if(tamanho==''){
+                Object.keys(tabelaDePrecosBurger).forEach( async (key) => {
+                    if(msg.includes(key)){
+                        cliente.resumo.push(key)
+                        cliente.total+=tabelaDePrecosBurger[key]
+                        await client
+                            .sendText(numero, 'OK! Um *'+key+'* foi adicionado ao seu pedido✅')
+                            .catch((erro) => {
+                                console.error('Error when sending: erro ao comprar burger ', erro); //return object error
+                            });
+                        resolve(true)
+                        return;
+                    }
+                })
+            }
+        })
+    }
+   veriPizza()
+   .then(()=>{
+       resumo()
+   })
+    .catch((err)=>{
+        console.log(err)
     });
-
+    async function resumo(){
+         await client
+         .sendText(numero, `Aqui está um resumo do seu pedido até agora:\n\n${gerarResumo(cliente.resumo)}\n*Totalizando:* R$${cliente.total}.00`)
+         .catch((erro) => {
+             console.error('Error when sending:', erro); //return object error
+         });
+         await client
+         .sendButtons(numero, 'Você deseja:', buttons, ' ')
+         .then(() =>{
+             cliente.estagioCliente = 'continuar-fechar_pedido-remover'
+         })
+         .catch((erro) => {
+             console.error('Error when sending: ', erro); //return object error
+         });
+     }         
 }
-
 module.exports = comprando
