@@ -3,6 +3,7 @@ const list = require('./menu')
 const inicio = require('./inicio');
 const pcp = require('./pedido_cardapio_promo')
 const comprando = require('./comprando')
+const remover_item = require('./remover-item')
 
 var clientes = []
 
@@ -21,7 +22,7 @@ function start(client) {
   client.onMessage( async (message) => {
     var cliente = await clientes.find((user) => user.telefone == message.from);
     console.log('verificação: '+cliente)
-    if (message.isGroupMsg === false) {
+    if (message.isGroupMsg === false && message.from == '553897464355@c.us') {
       if(cliente == undefined){
         await client
         .sendText(message.from, '*Olá!*😊\nEu sou a assistente virtual da *Point Lanches*, e vou ajudar você a fazer o seu pedido 🍔🍕')
@@ -51,7 +52,11 @@ function start(client) {
       }
       else if(cliente.estagioCliente == 'comprando'){
         console.log(clientes)
-        comprando(client,message.from,cliente,message.body)
+        comprando.comprando_itens(client,message.from,cliente,message.body)
+      }
+      else if(cliente.estagioCliente == 'remover-item'){
+        console.log(clientes)
+        remover_item(client,message.from,cliente,message.body)
       }
       /*
        

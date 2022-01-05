@@ -1,4 +1,4 @@
-function gerarResumo(resumo){
+async function gerarResumo(resumo){
     let todoResumo=''
     const countMap = {};
     for (const element of resumo) {
@@ -14,7 +14,6 @@ function gerarResumo(resumo){
     Object.keys(countMap).forEach((key) => {
         todoResumo+=`*${countMap[key]}x - ${key}* \n`
     });
-    
     return todoResumo;
 }
 module.exports = gerarResumo
