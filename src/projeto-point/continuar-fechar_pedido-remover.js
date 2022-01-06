@@ -3,10 +3,12 @@ const pedido_cardapio_promo = require('./pedido_cardapio_promo')
 const gerarResumo = require('./gerar-resumo')
 
 
-const continuar_fechar_revover = async (client,numero,cliente,msg)=>{
-    const list = await criar_selecao_remover(cliente)
+const continuar_fechar_remover = async (client,numero,cliente,msg)=>{
+    
+    console.log('a msg foi:',msg)
     if(msg.includes('Continuar Comprando')){
        await pedido_cardapio_promo(client,numero,cliente,msg)
+       console.log('entrou aqui')
     }
     else if(msg.includes('Fechar Pedido')){
         await client
@@ -23,7 +25,8 @@ const continuar_fechar_revover = async (client,numero,cliente,msg)=>{
           console.error('Error when sending: ', erro); //return object error
         });
     }
-    else if(msg.includes('Remover Algo')){
+    else if(msg.includes('Remover Item')){
+        const list = await criar_selecao_remover(cliente.resumo)
         await client
             .sendListMenu(numero, '🗑️Remover item', 'subTitle', 'Escolha o item que você deseja remover do pedido:', 'Clique aqui', list)
             .then(() => {
@@ -41,19 +44,23 @@ async function criar_selecao_remover(resumo){
         title:'Remover item',
         rows:[]
     }]
-    let lista = await gerarResumo(resumo).split('\n')
+    let lista = await gerarResumo(resumo)
+
     lista = lista.split('\n')
-    lista.pop()
+    
+    if(lista[lista.length-1]== '') lista.pop()
+
     lista = lista.map(function(nome) {
         return nome.substring(6,nome.length-2)
     });
-    for (var nomes in lista){
+    
+    for (let nomes of lista){
         list[0].rows.push({
             title:nomes,
-            description:'--------------------'
+            description:'----------------------------------------'
         })
     }
     return list
 }
   
-module.exports = continuar_fechar_revover
+module.exports = continuar_fechar_remover

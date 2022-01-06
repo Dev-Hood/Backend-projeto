@@ -1,9 +1,9 @@
 const venom = require('venom-bot');
-const list = require('./menu')
 const inicio = require('./inicio');
 const pcp = require('./pedido_cardapio_promo')
 const comprando = require('./comprando')
 const remover_item = require('./remover-item')
+const continuar_fechar_pedido_remover = require('./continuar-fechar_pedido-remover')
 
 var clientes = []
 
@@ -21,7 +21,6 @@ venom
 function start(client) {
   client.onMessage( async (message) => {
     var cliente = await clientes.find((user) => user.telefone == message.from);
-    console.log('verificação: '+cliente)
     if (message.isGroupMsg === false && message.from == '553897464355@c.us') {
       if(cliente == undefined){
         await client
@@ -53,6 +52,10 @@ function start(client) {
       else if(cliente.estagioCliente == 'comprando'){
         console.log(clientes)
         comprando.comprando_itens(client,message.from,cliente,message.body)
+      }
+      else if(cliente.estagioCliente == 'continuar-fechar_pedido-remover'){
+        console.log(clientes)
+        continuar_fechar_pedido_remover(client,message.from,cliente,message.body)
       }
       else if(cliente.estagioCliente == 'remover-item'){
         console.log(clientes)
