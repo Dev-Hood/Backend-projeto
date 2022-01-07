@@ -4,6 +4,7 @@
   "description": "",
   "main": "index1.js",
   "dependencies": {
+    "axios": "^0.24.0",
     "body-parser": "^1.19.1",
     "express": "^4.17.1",
     "mysql2": "^2.3.3",
@@ -19,7 +20,9 @@
   },
   "scripts": {
     "dev": "nodemon src/server.js",
-    "bot": "node src/projeto-point/index.js",
+    "bot": "node src/projeto-point/src/index.js",
+    "server": "nodemon src/projeto-point/views/servidor/server.js",
+    "req": "node src/projeto-point/views/servidor/enviar-req-pedido.js",
     "bd": "node src/database/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

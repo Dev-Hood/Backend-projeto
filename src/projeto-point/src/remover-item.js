@@ -1,10 +1,11 @@
 const comprando = require('./comprando')
 const precos = require('./precos')
 const remover_item = async (client,numero,cliente,msg)=>{
-    let msgkey = await msg.slice(0,msg.length-41)
+    let msgkey = await msg.slice(1,msg.length-41)
     console.log('msg key é: ',msgkey)
     let ind = cliente.resumo.indexOf(msgkey)
     await cliente.resumo.splice(ind,1)
+    if(msgkey.includes('Com Borda')) msgkey = await msgkey.slice(0,msgkey.length-10)
     console.log('resumo depois de apagar: ',cliente.resumo)
     if(msgkey.includes('Pequena') || msgkey.includes('Grande') || msgkey.includes('Média')){
         let txt = msgkey.split('-')

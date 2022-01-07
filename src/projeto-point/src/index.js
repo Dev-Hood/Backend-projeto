@@ -4,8 +4,12 @@ const pcp = require('./pedido_cardapio_promo')
 const comprando = require('./comprando')
 const remover_item = require('./remover-item')
 const continuar_fechar_pedido_remover = require('./continuar-fechar_pedido-remover')
-
+const gerenciar_endereco = require('./gerenciar-endereco')
+const gerenciar_pagamento = require('./gerenciar-pagamento')
 var clientes = []
+
+
+
 
 venom
   .create({
@@ -21,7 +25,7 @@ venom
 function start(client) {
   client.onMessage( async (message) => {
     var cliente = await clientes.find((user) => user.telefone == message.from);
-    if (message.isGroupMsg === false && message.from == '553897464355@c.us') {
+    if (message.isGroupMsg === false) {
       if(cliente == undefined){
         await client
         .sendText(message.from, '*Olá!*😊\nEu sou a assistente virtual da *Point Lanches*, e vou ajudar você a fazer o seu pedido 🍔🍕')
@@ -50,16 +54,24 @@ function start(client) {
 
       }
       else if(cliente.estagioCliente == 'comprando'){
-        console.log(clientes)
         comprando.comprando_itens(client,message.from,cliente,message.body)
+        console.log(clientes)
       }
       else if(cliente.estagioCliente == 'continuar-fechar_pedido-remover'){
+        await continuar_fechar_pedido_remover(client,message.from,cliente,message.body)
         console.log(clientes)
-        continuar_fechar_pedido_remover(client,message.from,cliente,message.body)
       }
       else if(cliente.estagioCliente == 'remover-item'){
+        await remover_item(client,message.from,cliente,message.body)
         console.log(clientes)
-        remover_item(client,message.from,cliente,message.body)
+      }
+      else if(cliente.estagioCliente == 'endereço'){
+        await gerenciar_endereco(client,message.from,cliente,message.body)
+        console.log(clientes)
+      }
+      else if(cliente.estagioCliente == 'pagamento'){
+        await gerenciar_pagamento(client,message.from,cliente,message.body)
+        console.log(clientes)
       }
       /*
        

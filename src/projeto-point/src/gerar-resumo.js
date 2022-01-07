@@ -12,7 +12,7 @@ async function gerarResumo(resumo){
       }
     }
     Object.keys(countMap).forEach((key) => {
-        todoResumo+=`*${countMap[key]}x - ${key}* \n`
+        todoResumo+=`*•${countMap[key]}x - ${key}* \n`
     });
     return todoResumo;
 }

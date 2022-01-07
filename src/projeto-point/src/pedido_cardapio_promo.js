@@ -33,7 +33,7 @@ const pedido_cardapio_promo = async (client,numero,cliente,msg)=>{
   }
   else if(msg.includes('Pedido') || msg.includes('Continuar Comprando')){
     await client
-      .sendListMenu(numero, '🧾Menu', 'subTitle', 'Escolha a opção referente ao que deseja:', 'Clique aqui', list)
+      .sendListMenu(numero, '🧾 *Menu*', 'subTitle', 'Escolha a opção referente ao que deseja:', '*Clique aqui*', list)
       .then(() => {
         cliente.estagioCliente = 'comprando'
       })

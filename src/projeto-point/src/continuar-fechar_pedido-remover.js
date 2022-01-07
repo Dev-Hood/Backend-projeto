@@ -5,10 +5,8 @@ const gerarResumo = require('./gerar-resumo')
 
 const continuar_fechar_remover = async (client,numero,cliente,msg)=>{
     
-    console.log('a msg foi:',msg)
     if(msg.includes('Continuar Comprando')){
        await pedido_cardapio_promo(client,numero,cliente,msg)
-       console.log('entrou aqui')
     }
     else if(msg.includes('Fechar Pedido')){
         await client
@@ -17,7 +15,7 @@ const continuar_fechar_remover = async (client,numero,cliente,msg)=>{
           console.error('Error when sending: ', erro); //return object error
         });
         await client
-        .sendText(numero, `Por favor, digite seu endereço🏠:\n Exemplo: Rua Américo Martins, 36`)
+        .sendText(numero, `Por favor, digite seu endereço🏠:\n\n*Exemplo:* Rua Américo Martins, 36`)
         .then(()=>{
             cliente.estagioCliente = 'endereço'
         })
@@ -28,7 +26,7 @@ const continuar_fechar_remover = async (client,numero,cliente,msg)=>{
     else if(msg.includes('Remover Item')){
         const list = await criar_selecao_remover(cliente.resumo)
         await client
-            .sendListMenu(numero, '🗑️Remover item', 'subTitle', 'Escolha o item que você deseja remover do pedido:', 'Clique aqui', list)
+            .sendListMenu(numero, '🗑️ *Remover item*', 'subTitle', 'Escolha o item que você deseja remover do pedido:', '*Clique aqui*', list)
             .then(() => {
                 cliente.estagioCliente = 'remover-item'
             })
