@@ -1,4 +1,5 @@
 const gerarResumo = require('./gerar-resumo')
+const requi = require('../views/servidor/enviar-req-pedido')
 const gerenciar_pagamento = async (client,numero,cliente,msg)=>{
     let veri = false
     if(msg.includes('Cartão')){
@@ -41,6 +42,7 @@ const gerenciar_pagamento = async (client,numero,cliente,msg)=>{
     }
     if(veri){
         await resumoFinal(client,numero,cliente)
+        requi(cliente)
     }
 
     

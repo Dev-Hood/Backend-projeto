@@ -6,6 +6,7 @@
     margin: 0;
     border: 0;
     box-sizing: border-box;
+    overflow-x: hidden;
     
 }
 body{
@@ -27,33 +28,87 @@ h1{
     margin-right: auto;
     background-color: white;
 }
-.back{
-    background-color: yellowgreen;
-    height: 200px;
-    padding-top: 30px;
-    padding-left: 20px;
+.container{
+   width: 100%;
+}
+.content{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    margin: 20px auto;
+    grid-gap: 25px;
+    padding: 0 10px;
+    width: max-content;
+}
+.card{
+    position: relative;
+    background-color: antiquewhite;
+    min-height: 350px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 8px;
+    width: 300px;
+    
+
+}
+.super{
+    font-family: 'Poppins',sans-serif;
+    font-weight: bolder;
+    background-color: rgb(0, 255, 115);
+    height: 50%;
+    border-radius: 8px 8px 0 0;
+    padding: 10px 20px;
+}
+.super p{
+    text-align: end;
 }
 .btn-pronto{
     position: absolute;
-    bottom: -20px;
-    right: 10px;
+    right: 5%;
+    top: 42%;
+    background-color: rgb(4, 133, 21);
+    width: 45px;
+    height: 45px;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.582);
+    border-radius: 100%;
+    color: white;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in;
+    cursor: pointer;
 }
-.card{
-    min-width: 300px;
-    margin-right: 00px;
+.btn-pronto:hover{
+    transform: scale(1.1);
+    background-color: rgba(65, 7, 224, 0.884);
 }
-label{
-    display: inline-block;
-    color: black;
-    font-size: 17px;
-    font-weight: bold;
-    font-family: 'Poppins',sans-serif;
+.inferior{
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 20px;
+    padding-left: 10px;
+}
+.inferior p{
+    margin-top: 10px;
+}
+.inferior p:nth-child(4){
     
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 40px;
+    text-align: center;
 }
-.row{
-    padding-top: 50px;
-    padding-left: 50px;
+
+@media(max-width:1305px){
+    .content{
+        grid-template-columns: repeat(3,1fr);
+    }
 }
-.container{
-    margin-right: 120px;
+@media(max-width:977px){
+    .content{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media(max-width:652px){
+    .content{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .card{
+        width: 90vw;
+    }
 }

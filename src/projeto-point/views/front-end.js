@@ -1,22 +1,37 @@
-const body = document.querySelector(".row")
+const express = require('express');
+const bodyparser = require('body-parser')
+const app = express()
+app.use(express.json())
+routes.use(bodyparser.urlencoded({extended:false}))
+routes.use(bodyparser.json())
+
+const requisicao;
+app.post('/pedidos',(req,res)=>{
+    console.log('Requisição do POST: ',req.body)
+    requisicao = req.body
+})
+
+requisicao.resumo.forEach(element => {
+  
+});
+
+
+const body = document.querySelector(".content")
 body.innerHTML+=`
-<div class="col s12 m2 container">
-  <div class="card">
-    <div class="card-image">
-      <div class="back">
-        
-        <input type="checkbox" id="horns" style="opacity: 1; position: relative;">
-        <label for="horns">Horns</label><br>
-        <input type="checkbox" id="horns2" style="opacity: 1; position: relative;">
-        <label for="horns2">Horns2</label><br>
-        <input type="checkbox" id="horns3" style="opacity: 1; position: relative;">
-        <label for="horns3">Horns3</label><br>
-      </div>
-      
-      <button class="waves-effect waves-light btn btn-pronto">Pronto!</button>
-    </div>
-    <div class="card-content">
-      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-    </div>
+<div class="card">
+  <div class="super">
+    <p>19:00</p>
+    <ol class="itens">
+      <li><input type="checkbox" class="check"> Teste</li>
+      <li><input type="checkbox" class="check"> Beste</li>
+    </ol>
   </div>
-</div>`
+  <button class="btn-pronto"><i class="material-icons">check</i></button>
+  <div class="inferior">
+    <p><b>Endereço:</b> Rua projetada C, 36 asdsds</p>
+    <p><b>Pagamento:</b> Dinheiro</p>
+    <p><b>Troco:</b> R$20.00</p>
+    <p>R$40.00</p>
+  </div>
+</div>
+`

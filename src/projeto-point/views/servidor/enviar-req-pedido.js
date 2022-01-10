@@ -1,9 +1,13 @@
 const axios = require('axios')
-const requi = async ()=>{
+const requi = async (cliente)=>{
     await axios.post('http://localhost:3030/pedidos', {
-        "firstName" : "Fred",
-        "lastName" : "Flintstone"
-    })
+        telefone:'999495116',
+        estagioCliente:'inicio',
+        resumo:['X-Bacon', 'Calamussa Grande Com Borda', 'X-Mamute'],
+        total:30,
+        pagamento:'Cartão',
+        endereco:'Rua projetada C, 36'
+      })
     .then(function (response) {
         console.log('A resposta para a requisição foi: '+JSON.stringify(response.data));
     })
