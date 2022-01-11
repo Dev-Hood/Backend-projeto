@@ -1,11 +1,8 @@
 const axios = require('axios')
-const requi = async ()=>{
-    await axios.post('http://localhost:3030/pedidos', {
-        "firstName" : "Fred",
-        "lastName" : "Flintstone"
-    })
+const requi = async (cliente)=>{
+    await axios.post('http://localhost:3030/savepedido',cliente)
     .then(function (response) {
-        console.log('A resposta para a requisição foi: '+JSON.stringify(response.data));
+        console.log('pedido salvo ',response.data);
     })
     .catch((erro) => {
         console.error('Erro!!!!!!!!!!: ', erro); //return object error

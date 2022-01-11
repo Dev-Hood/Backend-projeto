@@ -1,22 +1,48 @@
-const body = document.querySelector(".row")
-body.innerHTML+=`
-<div class="col s12 m2 container">
-  <div class="card">
-    <div class="card-image">
-      <div class="back">
-        
-        <input type="checkbox" id="horns" style="opacity: 1; position: relative;">
-        <label for="horns">Horns</label><br>
-        <input type="checkbox" id="horns2" style="opacity: 1; position: relative;">
-        <label for="horns2">Horns2</label><br>
-        <input type="checkbox" id="horns3" style="opacity: 1; position: relative;">
-        <label for="horns3">Horns3</label><br>
+
+axios.get('http://localhost:3030/captpedidos')
+    .then(function (response) {
+      if(response.data){
+        console.log('aqui: ',response.data)
+        renderizando(response.data)
+      } 
+    })
+    .catch((erro) => {
+        console.error('Erro!!!!!!!!!!: ', erro); //return object error
+    });
+
+const renderizando = (clientes)=>{
+  var itens = ''
+  const body = window.document.querySelector('.content')
+  clientes.forEach(element => {
+    element.resumo.forEach(element=>{
+      itens+=`<li><input type="checkbox" class="check"> ${element}</li>`
+    })
+    let card = document.createElement('div')
+    card.classList.add('card')
+    body.appendChild(card)
+    card.innerHTML=`
+      <div class="super">
+        <p>${element.hora}:${element.min}</p>
+        <ol class="itens">
+          ${itens}
+        </ol>
       </div>
-      
-      <button class="waves-effect waves-light btn btn-pronto">Pronto!</button>
-    </div>
-    <div class="card-content">
-      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-    </div>
-  </div>
-</div>`
+      <button class="btn-pronto"><i class="material-icons">check</i></button>
+      <div class="inferior">
+      <p><b>Endereço:</b> ${element.telefone}</p>
+        <p><b>Endereço:</b> ${element.endereco}</p>
+        <p><b>Pagamento:</b> ${element.pagamento}</p>
+        <p><b>Troco:</b> R$20.00</p>
+        <p>R$${element.total}</p>
+      </div>
+    `
+  });
+  
+}
+
+setInterval(()=>{
+  window.location.reload()
+},15*1000)
+
+
+

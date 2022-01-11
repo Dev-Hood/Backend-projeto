@@ -1,4 +1,6 @@
+
 const gerarResumo = require('./gerar-resumo')
+const requi = require('../views/servidor/enviar-req-pedido')
 const gerenciar_pagamento = async (client,numero,cliente,msg)=>{
     let veri = false
     if(msg.includes('Cartão')){
@@ -41,9 +43,13 @@ const gerenciar_pagamento = async (client,numero,cliente,msg)=>{
     }
     if(veri){
         await resumoFinal(client,numero,cliente)
+        var data = new Date();
+        var hora = data.getHours();       
+        var min  = data.getMinutes();
+        cliente["hora"] = hora
+        cliente["min"] = min
+        requi(cliente)
     }
-
-    
 }
 
 async function resumoFinal(client,numero,cliente){
@@ -53,7 +59,6 @@ ${await gerarResumo(cliente.resumo)}
 *➡️ Totalizando:* R$${cliente.total}.00
 *➡️ Endereço:* ${cliente.endereco}
 *➡️ Forma de Pagamento:* ${cliente.pagamento}
-
 Agora é só aguardar, seu pedido em breve será entregue   🛵💨 
         `)
         .catch((erro) => {
