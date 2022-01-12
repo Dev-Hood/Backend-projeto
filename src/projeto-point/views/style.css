@@ -45,17 +45,17 @@ h1{
     min-height: 370px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 8px;
-    width: 300px;
-    
-
+    width: 320px;
+    height: max-content;
 }
 .super{
     font-family: 'Poppins',sans-serif;
     font-weight: bolder;
     background-color: rgb(0, 255, 115);
-    height: 50%;
+    min-height: 200px;
     border-radius: 8px 8px 0 0;
     padding: 10px 20px;
+    padding-bottom: 20px;
 }
 .super p{
     text-align: end;
@@ -63,28 +63,34 @@ h1{
 .btn-pronto{
     position: absolute;
     right: 5%;
-    top: 42%;
     background-color: rgb(4, 133, 21);
     width: 45px;
     height: 45px;
     box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.582);
-    border-radius: 100%;
+    border-radius: 50%;
     color: white;
     text-transform: uppercase;
     transition: all 0.3s ease-in;
     cursor: pointer;
+    border: rgb(43, 110, 4) solid 2px;
+    z-index: 1;
 }
 .btn-pronto:hover{
     transform: scale(1.1);
-    background-color: rgba(65, 7, 224, 0.884);
+    background-color: rgb(0, 68, 255);
+    border: rgb(33, 4, 161) solid 2px;
 }
 .inferior{
+    height: max-content;
+    background-color: white;
     font-family: Arial, Helvetica, sans-serif;
-    padding-top: 20px;
+    padding-top: 20px;  
     padding-left: 10px;
 }
 .inferior p{
+    padding-right: 10px;
     margin-top: 10px;
+    word-break: break-all;
 }
 .inferior p:last-child{
     display: flex;

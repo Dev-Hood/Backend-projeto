@@ -29,7 +29,7 @@ const renderizando = (clientes)=>{
       </div>
       <button class="btn-pronto"><i class="material-icons">check</i></button>
       <div class="inferior">
-      <p><b>Endereço:</b> ${element.telefone}</p>
+      <p><b>Número:</b> ${element.telefone}</p>
         <p><b>Endereço:</b> ${element.endereco}</p>
         <p><b>Pagamento:</b> ${element.pagamento}</p>
         <p><b>Troco:</b> R$20.00</p>
@@ -41,7 +41,7 @@ const renderizando = (clientes)=>{
 }
 
 setInterval(()=>{
-  window.location.reload()
+  //window.location.reload()
 },15*1000)
 
 
