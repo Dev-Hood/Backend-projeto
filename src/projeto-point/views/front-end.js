@@ -158,5 +158,3 @@ setInterval(() => {
 window.location.reload()
 }, 15 * 1000)
 */
-
-
