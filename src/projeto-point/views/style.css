@@ -61,8 +61,9 @@ h1{
     text-align: end;
 }
 .btn-pronto{
-    position: absolute;
-    right: 5%;
+    position:absolute;
+    bottom: 156px;
+    right: 10px;
     background-color: rgb(4, 133, 21);
     width: 45px;
     height: 45px;
@@ -73,7 +74,6 @@ h1{
     transition: all 0.3s ease-in;
     cursor: pointer;
     border: rgb(43, 110, 4) solid 2px;
-    z-index: 1;
 }
 .btn-pronto:hover{
     transform: scale(1.1);

@@ -25,7 +25,7 @@ venom
 function start(client) {
   client.onMessage( async (message) => {
     var cliente = await clientes.find((user) => user.telefone == message.from);
-    if (message.isGroupMsg === false) {
+    if (message.isGroupMsg === false && message.from == '553899909503@c.us') {
       if(cliente == undefined){
         await client
         .sendText(message.from, '*Olá!*😊\nEu sou a assistente virtual da *Point Lanches*, e vou ajudar você a fazer o seu pedido 🍔🍕')
@@ -41,7 +41,6 @@ function start(client) {
             }
           )
           await inicio(client,message.from,clientes[clientes.length-1])
-          
         })
         .catch((erro) => {
           console.error('Error when sending: ', erro); //return object error

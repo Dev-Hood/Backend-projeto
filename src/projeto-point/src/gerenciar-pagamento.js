@@ -49,6 +49,7 @@ const gerenciar_pagamento = async (client,numero,cliente,msg)=>{
         cliente["hora"] = hora
         cliente["min"] = min
         requi(cliente)
+        cliente.estagioCliente = 'inicio'
     }
 }
 
