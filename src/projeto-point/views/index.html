@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <title>Point Lanches</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <title>Point Lanches</title>
 </head>
+
 <body>
-    <h1 id="titulo">Pedidos</h1>
-    <div class="line"></div>
-    <div class="container">
-      <div class="content" id="content">
-        <div class="card">
-          <div class="super">
-            <p>19:00</p>
-            <ol class="itens">
-              <li><input type="checkbox" class="check"> Calamussa Grande com borda</li>
-              <li><input type="checkbox" class="check"> Calamussa Grande com borda</li>
-              <li><input type="checkbox" class="check"> Calamussa Grande com borda</li>
-            </ol>
-            
-          </div>
-          <button class="btn-pronto"><i class="material-icons">check</i></button>
-          <div class="inferior">
-            <p><b>Numero:</b> 999034656</p>
-            <p><b>Endereço:</b> Rua brablabla, 46</p>
-            <p><b>Pagamento:</b> Dinheirp</p>
-            <p><b>Troco:</b> R$20.00</p>
-            <p>R$30</p>
-          </div>
+  <h1 id="titulo">Pedidos</h1>
+  <div class="line"></div>
+  <div class="container">
+    <div class="content" id="content">
+      <div class="card">
+        <div class="super">
+          <p>19:00</p>
+          <ol class="itens">
+            <li><input type="checkbox" class="check"> Calamussa Grande com borda</li>
+            <li><input type="checkbox" class="check"> Calamussa Grande com borda</li>
+            <li><input type="checkbox" class="check"> Calamussa Grande com borda</li>
+          </ol>
         </div>
-        
+        <button class="btn-pronto"><i class="material-icons">check</i></button>
+        <div class="inferior">
+          <p><b>Numero:</b> 999034656</p>
+          <p><b>Endereço:</b> Rua brablabla, 46</p>
+          <p><b>Pagamento:</b> Dinheirp</p>
+          <p><b>Troco:</b> R$20.00</p>
+          <p>R$30</p>
+        </div>
       </div>
-    </div>
-    <script src="./front-end.js"></script>
-    <script src="./pos.js"></script>
+      
+  </div>
+  <script src="./front-end.js"></script>
+  <script src="./removeCard.js"></script>
+  
 </body>
 
 </html>

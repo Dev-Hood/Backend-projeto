@@ -3,7 +3,7 @@ async function card() {
   async function renderizando(isReloaded) {
     const response = await fetch('http://localhost:3030/captpedidos')
     const value = await response.json()
-
+    
     if (value) {
       if (isReloaded) {
         await inserirCard(value, value.length)
@@ -33,11 +33,12 @@ async function card() {
       pedidos[i].resumo.forEach(item => {
         itens += `<li><input type="checkbox" class="check"> ${item}</li>`
       })
-      const card = document.createElement('div')
-      card.classList.add('card')
-      content.appendChild(card)
-      card.innerHTML = `
-      <div class="card">
+      //const card = document.createElement('div')
+      //card.classList.add('card')
+      //content.appendChild(card)
+      const telefone  = pedidos[i].telefone.slice(2 , pedidos[i].telefone.length-5)
+      content.innerHTML += `
+      <div class="card" data-id="${pedidos[i].telefone}">
         <div class="super">
           <p>${pedidos[i].hora}:${pedidos[i].min}</p>
           <ol class="itens">
@@ -45,11 +46,11 @@ async function card() {
           </ol>
         </div>
         <div class="inferior">
-        <button class="btn-pronto"><i class="material-icons">check</i></button>
-        <p><b>Número:</b> ${pedidos[i].telefone}</p>
+        <button class="btn-pronto"><i class="material-icons" data-remove="${pedidos[i].telefone}" >check</i></button>
+        <p><b>Número:</b> ${telefone}</p>
           <p><b>Endereço:</b> ${pedidos[i].endereco}</p>
           <p><b>Pagamento:</b> ${pedidos[i].pagamento}</p>
-          <p><b>Troco:</b> R$20.00</p>
+          <p><b>Troco:</b> R$${pedidos[i].troco}</p>
           <p>R$${pedidos[i].total}</p>
         </div>
       </div>

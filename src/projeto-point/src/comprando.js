@@ -31,13 +31,19 @@ const buttons2 = [
 ]
 const gerarResumo = require('./gerar-resumo')
 const precos = require('./precos')
+const sabores = require('./2sabores')
 
 const comprando = {
     comprando_itens: (client, numero, cliente, msg) => {
         var tamanho = ''
         function veriPizza() {
             return new Promise(async (resolve) => {
-                if (msg.includes('Sim') || msg.includes('Não')) {
+                if (msg.includes('2 sabores')) {
+                    if (msg.includes('Média')) msg = 'Média'
+                    else { msg = 'Grande' }
+                    await sabores(client, numero, cliente, msg, 1)
+                }
+                else if (msg.includes('Sim') || msg.includes('Não')) {
                     if (msg.includes('Sim')) {
                         let precoBorda = 2
                         if (cliente.resumo[cliente.resumo.length - 1].includes('Pequena')) precoBorda = 1
@@ -122,6 +128,5 @@ const comprando = {
                 console.error('Error when sending: ', erro); //return object error
             });
     }
-
 }
 module.exports = comprando

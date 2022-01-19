@@ -16,6 +16,10 @@ app.get('/captpedidos', (req, res) => {
         res.send(false)
     }
 })
+app.delete('/captpedidos', (req,res)=>{
+    pedidos.pop(req.body)
+    res.send('pedido deletado')
+})
 
 app.post('/savepedido', (req, res) => {
     pedidos.unshift(req.body)
